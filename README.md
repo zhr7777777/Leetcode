@@ -1,1 +1,1 @@
-# Leetcode
+# Personal solutions and explanation of leetcode
