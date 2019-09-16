@@ -1,7 +1,7 @@
 func trailingZeroes(n int) int {
     pow := log5(n)
     result := 0
-    for i:=0; i<pow; i++ {
+    for i:=0; i<pow; i++ {  // important
         result += int(n / pow5(i+1))
     }
     return result
