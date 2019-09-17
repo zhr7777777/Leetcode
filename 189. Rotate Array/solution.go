@@ -17,3 +17,21 @@ func rotate(nums []int, k int) {   // 236ms
         }
     }
 }
+
+func rotate(nums []int, k int) {    // 52ms important
+    if len(nums) == 0 {
+        return
+    }
+    k = k % len(nums)
+    if k == 0 {
+        return
+    }
+    storage := append([]int(nil), nums[len(nums)-k:len(nums)]...)
+    for i:=0; i<len(nums); i++ {
+        if len(nums)-1-i-k < 0 {
+            nums[len(nums)-1-i] = storage[len(nums)-1-i]
+            continue
+        }
+        nums[len(nums)-1-i] = nums[len(nums)-1-i-k]
+    }
+}
