@@ -13,7 +13,7 @@ func isSymmetric(root *TreeNode) bool {
     return isSymmetricSameTree(root.Left, root.Right) 
 }
 
-func isSameTree(p *TreeNode, q *TreeNode) bool {
+func isSymmetricSameTree(p *TreeNode, q *TreeNode) bool {
     if p == nil && q == nil {   // important
         return true
     }
@@ -23,5 +23,5 @@ func isSameTree(p *TreeNode, q *TreeNode) bool {
     if p != nil && q == nil {   // important
         return false
     }
-    return p.Val == q.Val && isSameTree(p.Left, q.Right) && isSameTree(p.Right, q.Left)
+    return p.Val == q.Val && isSymmetricSameTree(p.Left, q.Right) && isSymmetricSameTree(p.Right, q.Left)
 }
