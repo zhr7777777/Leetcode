@@ -12,7 +12,7 @@ func rob(nums []int) int {
     for i:=2; i<length; i++ {
         record = append(record, max(record[len(record)-1], record[len(record)-2] + nums[i]))
     }
-    return max(record[len(record)-1], record[len(record)-2])
+    return record[len(record)-1]
 }
 
 func max(a int, b int) int {
