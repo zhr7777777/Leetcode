@@ -6,7 +6,7 @@ var threeSum = function(nums) {
     nums = nums.sort((a, b) => a - b)   // 升序排列
     let result = []
     for(let i=0; i<nums.length-2; i++) {
-        if(i===0 || i > 0 && nums[i] !== nums[i-1]) { // 当前元素和上一个元素相等，找过了跳过
+        if(i===0 || (i > 0 && nums[i] !== nums[i-1])) { // 当前元素和上一个元素相等，找过了跳过
             let start = i + 1
             let end = nums.length - 1
             let target = 0 - nums[i]

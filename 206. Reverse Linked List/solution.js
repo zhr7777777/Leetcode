@@ -9,6 +9,10 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
+
+// Input: 1->2->3->4->5->NULL
+// Output: 5->4->3->2->1->NULL
+
 var reverseList = function(head) {
     if(!head) return head
     let headNode = new ListNode()
@@ -27,10 +31,12 @@ var reverseList = function(head) {
 
 // recursively
 var reverseList = function(head) {
-    if(!head) return head
+    if(!head) { // 考虑空链表的情况
+        return null
+    }
     if(!head.next) return head
-    let p = reverseList(head.next)
-    head.next.next = head
+    let p = reverseList(head.next)  // 递归到最后一个节点，比如上面的5
+    head.next.next = head   // 对于非最后节点的操作
     head.next = null
     return p
 };
