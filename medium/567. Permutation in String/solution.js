@@ -3,61 +3,28 @@
  * @param {string} s2
  * @return {boolean}
  */
-var checkInclusion = function(s1, s2) {
-    // let record = new Set(s1.split('')) // 涓嶈兘鐢╯et锛宻et涓嶄細璁板綍閲嶅瀛楃
-    // for(let i=0; i<s2.length; i++) {
-    //     if(record.has(s2[i])) {
-    //         if(i+s1.length-1 < s2.length) {
-    //             let j = 0
-    //             for(; j<s1.length; j++) {
-    //                 if(!record.has(s2[i+j])) {
-    //                     break
-    //                 } else {
-    //                     record.delete(s2[i+j])
-    //                 }
-    //             }
-    //             if(j === s1.length) {
-    //                 return true
-    //             } else {
-    //                 record = new Set(s1.split(''))
-    //             }
-    //         }
-    //     }
-    // }
-    // return false
-
-    let record = {}
-    for(let i=0; i<s1.length; i++) {
-        if(record[s1[i]]) {
-            record[s1[i]]++
-        } else {
-            record[s1[i]] = 1
-        }
+var checkInclusion = function (s1, s2) {
+    let map = {}
+    for (let i = 0; i < s1.length; i++) {
+      map[s1[i]] = s1[i] in map ? map[s1[i]] + 1 : 1
     }
-    let cache = {...record}
-    for(let i=0; i<s2.length; i++) {
-        if(record[s2[i]]) {
-            if(i+s1.length-1 < s2.length) {
-                let j = 0
-                for(; j<s1.length; j++) {
-                    if(!record[s2[i+j]]) {
-                        break
-                    } else {
-                        record[s2[i+j]]--
-                        if(record[s2[i+j]] === 0) {
-                            delete record[s2[i+j]]
-                        }
-                    }
-                }
-                if(j === s1.length) {
-                    return true
-                } else {
-                    record = {...cache}
-                }
-            } else {
-                return false
-            }
-        }
+    for (let i = 0; i < s2.length; i++) {
+      if (!(s2[i] in map)) continue
+      if (i + s1.length > s2.length) break
+      let candidate = s2.slice(i, i + s1.length)
+      if (isPermutation(map, candidate)) {
+        return true
+      }
     }
     return false
-};
+  };
+  
+  const isPermutation = function (map, s2) {
+    const localMap = { ...map }
+    for (let i = 0; i < s2.length; i++) {
+      if (!(s2[i] in localMap)) return false
+      if (localMap[s2[i]] === 0) return false
+      localMap[s2[i]] = localMap[s2[i]] - 1
+    }
+    return true
+  }
